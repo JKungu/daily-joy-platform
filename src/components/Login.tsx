@@ -1,9 +1,11 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from '@/hooks/use-toast';
+import { ThemeToggle } from './ThemeToggle';
 
 interface LoginProps {
   onToggleMode: () => void;
@@ -48,18 +50,21 @@ const Login: React.FC<LoginProps> = ({ onToggleMode }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4 relative">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
       <Card className="w-full max-w-md shadow-xl animate-fade-in">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Welcome Back
           </CardTitle>
-          <p className="text-gray-600">Sign in to your account</p>
+          <p className="text-muted-foreground">Sign in to your account</p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="text-sm font-medium">
                 Email
               </label>
               <Input
@@ -72,7 +77,7 @@ const Login: React.FC<LoginProps> = ({ onToggleMode }) => {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="text-sm font-medium">
                 Password
               </label>
               <Input
@@ -93,11 +98,11 @@ const Login: React.FC<LoginProps> = ({ onToggleMode }) => {
             </Button>
           </form>
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               Don't have an account?{' '}
               <button
                 onClick={onToggleMode}
-                className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors"
               >
                 Sign up here
               </button>

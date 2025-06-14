@@ -1,13 +1,41 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React, { useState } from 'react';
+import { AuthProvider, useAuth } from '@/contexts/AuthContext';
+import Auth from '@/components/Auth';
+import Dashboard from '@/components/Dashboard';
+import Jokes from '@/components/Jokes';
+import Experiences from '@/components/Experiences';
+
+type ViewType = 'dashboard' | 'jokes' | 'experiences';
+
+const AppContent: React.FC = () => {
+  const { isAuthenticated } = useAuth();
+  const [currentView, setCurrentView] = useState<ViewType>('dashboard');
+
+  if (!isAuthenticated) {
+    return <Auth />;
+  }
+
+  switch (currentView) {
+    case 'jokes':
+      return <Jokes onBack={() => setCurrentView('dashboard')} />;
+    case 'experiences':
+      return <Experiences onBack={() => setCurrentView('dashboard')} />;
+    default:
+      return (
+        <Dashboard
+          onSelectJokes={() => setCurrentView('jokes')}
+          onSelectExperiences={() => setCurrentView('experiences')}
+        />
+      );
+  }
+};
+
+const Index: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 };
 

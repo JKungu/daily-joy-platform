@@ -66,17 +66,17 @@ const SignUp: React.FC<SignUpProps> = ({ onToggleMode }) => {
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
-      <Card className="w-full max-w-md shadow-xl animate-fade-in">
+      <Card className="w-full max-w-md shadow-xl animate-fade-in dark:bg-gray-800 dark:border-gray-700">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             Create Account
           </CardTitle>
-          <p className="text-muted-foreground">Join us today</p>
+          <p className="text-muted-foreground dark:text-gray-400">Join us today</p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Email
               </label>
               <Input
@@ -85,11 +85,11 @@ const SignUp: React.FC<SignUpProps> = ({ onToggleMode }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="transition-all duration-200 focus:ring-2 focus:ring-purple-500"
+                className="transition-all duration-200 focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Password
               </label>
               <Input
@@ -98,11 +98,11 @@ const SignUp: React.FC<SignUpProps> = ({ onToggleMode }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Create a password"
-                className="transition-all duration-200 focus:ring-2 focus:ring-purple-500"
+                className="transition-all duration-200 focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="age" className="text-sm font-medium text-gray-700">
+              <label htmlFor="age" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Age
               </label>
               <Input
@@ -113,23 +113,23 @@ const SignUp: React.FC<SignUpProps> = ({ onToggleMode }) => {
                 placeholder="Enter your age"
                 min="1"
                 max="120"
-                className="transition-all duration-200 focus:ring-2 focus:ring-purple-500"
+                className="transition-all duration-200 focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
               />
             </div>
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-200"
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-200 text-white"
               disabled={isLoading}
             >
               {isLoading ? "Creating account..." : "Create Account"}
             </Button>
           </form>
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               Already have an account?{' '}
               <button
                 onClick={onToggleMode}
-                className="text-purple-600 hover:text-purple-700 font-medium transition-colors"
+                className="text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium transition-colors"
               >
                 Sign in here
               </button>

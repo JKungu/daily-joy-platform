@@ -73,7 +73,7 @@ const Jokes: React.FC<JokesProps> = ({ onBack }) => {
           <Button
             onClick={onBack}
             variant="ghost"
-            className="flex items-center gap-2 hover:bg-yellow-100 dark:hover:bg-yellow-900/30 transition-colors"
+            className="flex items-center gap-2 hover:bg-yellow-100 dark:hover:bg-yellow-900/30 transition-colors text-gray-800 dark:text-gray-200"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
@@ -84,10 +84,10 @@ const Jokes: React.FC<JokesProps> = ({ onBack }) => {
 
       <main className="max-w-4xl mx-auto p-6">
         <div className="text-center mb-8 animate-fade-in">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
             Time for Some Laughs! 😄
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 dark:text-gray-300">
             Click the button below to get a random joke
           </p>
         </div>
@@ -97,7 +97,7 @@ const Jokes: React.FC<JokesProps> = ({ onBack }) => {
             <Button
               onClick={generateJoke}
               disabled={isLoading}
-              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 transition-all duration-200 text-lg px-8 py-3"
+              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 transition-all duration-200 text-lg px-8 py-3 text-white"
               size="lg"
             >
               {isLoading ? (
@@ -112,15 +112,15 @@ const Jokes: React.FC<JokesProps> = ({ onBack }) => {
           </div>
 
           {joke && (
-            <Card className="shadow-xl animate-fade-in">
+            <Card className="shadow-xl animate-fade-in dark:bg-gray-800 dark:border-gray-700">
               <CardContent className="p-8">
                 <div className="space-y-6">
                   <div className="text-center">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                    <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
                       {joke.setup}
                     </h3>
-                    <div className="border-t border-gray-200 pt-4">
-                      <p className="text-lg text-blue-600 font-medium">
+                    <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
+                      <p className="text-lg text-blue-600 dark:text-blue-400 font-medium">
                         {joke.punchline}
                       </p>
                     </div>
@@ -129,7 +129,7 @@ const Jokes: React.FC<JokesProps> = ({ onBack }) => {
                     <Button
                       onClick={generateJoke}
                       variant="outline"
-                      className="hover:bg-yellow-50 border-yellow-300 text-yellow-700 hover:border-yellow-400"
+                      className="hover:bg-yellow-50 border-yellow-300 text-yellow-700 hover:border-yellow-400 dark:hover:bg-yellow-900/30 dark:border-yellow-600 dark:text-yellow-400 dark:hover:border-yellow-500"
                     >
                       Another One!
                     </Button>

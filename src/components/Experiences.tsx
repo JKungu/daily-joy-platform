@@ -58,7 +58,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ onBack }) => {
           <Button
             onClick={onBack}
             variant="ghost"
-            className="flex items-center gap-2 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
+            className="flex items-center gap-2 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors text-gray-800 dark:text-gray-200"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
@@ -69,10 +69,10 @@ const Experiences: React.FC<ExperiencesProps> = ({ onBack }) => {
 
       <main className="max-w-4xl mx-auto p-6">
         <div className="text-center mb-8 animate-fade-in">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
             Inspiring Life Experiences ✨
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 dark:text-gray-300">
             Discover stories that inspire and motivate
           </p>
         </div>
@@ -81,7 +81,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ onBack }) => {
           <div className="text-center">
             <Button
               onClick={generateExperience}
-              className="bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 transition-all duration-200 text-lg px-8 py-3"
+              className="bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 transition-all duration-200 text-lg px-8 py-3 text-white"
               size="lg"
             >
               Generate Experience
@@ -89,25 +89,25 @@ const Experiences: React.FC<ExperiencesProps> = ({ onBack }) => {
           </div>
 
           {currentExperience && (
-            <Card className="shadow-xl animate-fade-in">
+            <Card className="shadow-xl animate-fade-in dark:bg-gray-800 dark:border-gray-700">
               <CardContent className="p-8">
                 <div className="space-y-6">
                   <div className="text-center">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center justify-center gap-2">
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center justify-center gap-2">
                       <Heart className="w-6 h-6 text-red-500" />
                       {currentExperience.title}
                     </h3>
                   </div>
                   
                   <div className="prose prose-lg max-w-none">
-                    <p className="text-gray-700 leading-relaxed text-justify">
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify">
                       {currentExperience.story}
                     </p>
                   </div>
 
-                  <div className="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg border-l-4 border-purple-500">
-                    <h4 className="text-lg font-semibold text-purple-800 mb-2">Key Takeaway:</h4>
-                    <p className="text-purple-700 font-medium">
+                  <div className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 p-6 rounded-lg border-l-4 border-purple-500">
+                    <h4 className="text-lg font-semibold text-purple-800 dark:text-purple-300 mb-2">Key Takeaway:</h4>
+                    <p className="text-purple-700 dark:text-purple-200 font-medium">
                       {currentExperience.moral}
                     </p>
                   </div>
@@ -116,7 +116,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ onBack }) => {
                     <Button
                       onClick={generateExperience}
                       variant="outline"
-                      className="hover:bg-purple-50 border-purple-300 text-purple-700 hover:border-purple-400"
+                      className="hover:bg-purple-50 border-purple-300 text-purple-700 hover:border-purple-400 dark:hover:bg-purple-900/30 dark:border-purple-600 dark:text-purple-400 dark:hover:border-purple-500"
                     >
                       Read Another Story
                     </Button>

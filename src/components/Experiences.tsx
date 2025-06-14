@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Heart } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 interface ExperiencesProps {
   onBack: () => void;
@@ -51,17 +52,18 @@ const Experiences: React.FC<ExperiencesProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
-      <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 p-4">
-        <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+      <header className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 p-4">
+        <div className="max-w-4xl mx-auto flex justify-between items-center">
           <Button
             onClick={onBack}
             variant="ghost"
-            className="flex items-center gap-2 hover:bg-purple-100 transition-colors"
+            className="flex items-center gap-2 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
           </Button>
+          <ThemeToggle />
         </div>
       </header>
 

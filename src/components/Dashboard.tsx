@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
 import { Smile, Star, LogOut } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 interface DashboardProps {
   onSelectJokes: () => void;
@@ -14,22 +15,25 @@ const Dashboard: React.FC<DashboardProps> = ({ onSelectJokes, onSelectExperience
   const { user, profile, logout } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
-      <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700">
+      <header className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 p-4">
         <div className="max-w-4xl mx-auto flex justify-between items-center">
           <div>
-            <h1 className="text-xl font-bold text-gray-800">Welcome back!</h1>
-            <p className="text-sm text-gray-600">{user?.email}</p>
+            <h1 className="text-xl font-bold text-gray-800 dark:text-gray-200">Welcome back!</h1>
+            <p className="text-sm text-gray-600 dark:text-gray-400">{user?.email}</p>
           </div>
-          <Button
-            onClick={logout}
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-2 hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
-            Sign Out
-          </Button>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <Button
+              onClick={logout}
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-2 hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -88,8 +92,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onSelectJokes, onSelectExperience
         </div>
 
         {profile && profile.age < 18 && (
-          <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg text-center animate-fade-in">
-            <p className="text-blue-800">
+          <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg text-center animate-fade-in">
+            <p className="text-blue-800 dark:text-blue-200">
               🎉 Hey there, young explorer! Enjoy age-appropriate content curated just for you.
             </p>
           </div>

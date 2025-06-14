@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, RefreshCw } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { ThemeToggle } from './ThemeToggle';
 
 interface JokesProps {
   onBack: () => void;
@@ -66,17 +67,18 @@ const Jokes: React.FC<JokesProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50">
-      <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 p-4">
-        <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-gray-900 dark:to-gray-800">
+      <header className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 p-4">
+        <div className="max-w-4xl mx-auto flex justify-between items-center">
           <Button
             onClick={onBack}
             variant="ghost"
-            className="flex items-center gap-2 hover:bg-yellow-100 transition-colors"
+            className="flex items-center gap-2 hover:bg-yellow-100 dark:hover:bg-yellow-900/30 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
           </Button>
+          <ThemeToggle />
         </div>
       </header>
 

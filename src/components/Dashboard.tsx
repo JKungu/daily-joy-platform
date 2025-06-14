@@ -11,7 +11,7 @@ interface DashboardProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ onSelectJokes, onSelectExperiences }) => {
-  const { user, logout } = useAuth();
+  const { user, profile, logout } = useAuth();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
@@ -87,7 +87,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onSelectJokes, onSelectExperience
           </Card>
         </div>
 
-        {user && user.age < 18 && (
+        {profile && profile.age < 18 && (
           <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg text-center animate-fade-in">
             <p className="text-blue-800">
               🎉 Hey there, young explorer! Enjoy age-appropriate content curated just for you.

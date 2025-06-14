@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -30,18 +29,18 @@ const Login: React.FC<LoginProps> = ({ onToggleMode }) => {
       return;
     }
 
-    const success = login(email, password);
+    const { error } = await login(email, password);
     
-    if (success) {
+    if (error) {
       toast({
-        title: "Welcome back!",
-        description: "You've successfully logged in"
+        title: "Login failed",
+        description: error,
+        variant: "destructive"
       });
     } else {
       toast({
-        title: "Login failed",
-        description: "Invalid email or password",
-        variant: "destructive"
+        title: "Welcome back!",
+        description: "You've successfully logged in"
       });
     }
     

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -42,18 +41,18 @@ const SignUp: React.FC<SignUpProps> = ({ onToggleMode }) => {
       return;
     }
 
-    const success = signUp(email, password, ageNum);
+    const { error } = await signUp(email, password, ageNum);
     
-    if (success) {
+    if (error) {
       toast({
-        title: "Account created!",
-        description: `Welcome! You are ${ageNum >= 18 ? 'an adult' : 'under 18'} user.`
+        title: "Sign up failed",
+        description: error,
+        variant: "destructive"
       });
     } else {
       toast({
-        title: "Sign up failed",
-        description: "An account with this email already exists",
-        variant: "destructive"
+        title: "Account created!",
+        description: `Welcome! You are ${ageNum >= 18 ? 'an adult' : 'under 18'} user.`
       });
     }
     

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from '@/hooks/use-toast';
 import { ThemeToggle } from './ThemeToggle';
+import EmailVerification from './EmailVerification';
 
 interface SignUpProps {
   onToggleMode: () => void;
@@ -16,7 +17,10 @@ const SignUp: React.FC<SignUpProps> = ({ onToggleMode }) => {
   const [password, setPassword] = useState('');
   const [age, setAge] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { signUp } = useAuth();
+  const [isResending, setIsResending] = useState(false);
+  const [showEmailVerification, setShowEmailVerification] = useState(false);
+  const [verificationEmail, setVerificationEmail] = useState('');
+  const { signUp, resendConfirmation } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,13 +47,20 @@ const SignUp: React.FC<SignUpProps> = ({ onToggleMode }) => {
       return;
     }
 
-    const { error } = await signUp(email, password, ageNum);
+    const { error, needsEmailVerification } = await signUp(email, password, ageNum);
     
     if (error) {
       toast({
         title: "Sign up failed",
         description: error,
         variant: "destructive"
+      });
+    } else if (needsEmailVerification) {
+      setVerificationEmail(email);
+      setShowEmailVerification(true);
+      toast({
+        title: "Check your email",
+        description: "We've sent you a verification link to complete your registration."
       });
     } else {
       toast({
@@ -60,6 +71,48 @@ const SignUp: React.FC<SignUpProps> = ({ onToggleMode }) => {
     
     setIsLoading(false);
   };
+
+  const handleResendEmail = async () => {
+    setIsResending(true);
+    try {
+      const { error } = await resendConfirmation(verificationEmail);
+      if (error) {
+        toast({
+          title: "Failed to resend email",
+          description: error,
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Email sent!",
+          description: "Check your inbox for the verification link."
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to resend verification email",
+        variant: "destructive"
+      });
+    }
+    setIsResending(false);
+  };
+
+  const handleBackToSignUp = () => {
+    setShowEmailVerification(false);
+    setVerificationEmail('');
+  };
+
+  if (showEmailVerification) {
+    return (
+      <EmailVerification
+        email={verificationEmail}
+        onResendEmail={handleResendEmail}
+        onBack={handleBackToSignUp}
+        isResending={isResending}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-100 dark:from-gray-900 dark:to-gray-800 p-4 relative">

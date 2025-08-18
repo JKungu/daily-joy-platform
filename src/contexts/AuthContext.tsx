@@ -15,7 +15,8 @@ interface AuthContextType {
   profile: UserProfile | null;
   session: Session | null;
   login: (email: string, password: string) => Promise<{ error?: string }>;
-  signUp: (email: string, password: string, age: number) => Promise<{ error?: string }>;
+  signUp: (email: string, password: string, age: number) => Promise<{ error?: string; needsEmailVerification?: boolean }>;
+  resendConfirmation: (email: string) => Promise<{ error?: string }>;
   logout: () => Promise<void>;
   isAuthenticated: boolean;
   loading: boolean;
@@ -96,11 +97,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const signUp = async (email: string, password: string, age: number): Promise<{ error?: string }> => {
+  const signUp = async (email: string, password: string, age: number): Promise<{ error?: string; needsEmailVerification?: boolean }> => {
     try {
       const redirectUrl = `${window.location.origin}/`;
       
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -109,6 +110,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             age: age,
             is_adult: age >= 18
           }
+        }
+      });
+
+      if (error) {
+        return { error: error.message };
+      }
+
+      // Check if email confirmation is required
+      if (data.user && !data.session) {
+        return { needsEmailVerification: true };
+      }
+
+      return {};
+    } catch (error) {
+      return { error: 'An unexpected error occurred' };
+    }
+  };
+
+  const resendConfirmation = async (email: string): Promise<{ error?: string }> => {
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/`
         }
       });
 
@@ -153,6 +179,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       session,
       login,
       signUp,
+      resendConfirmation,
       logout,
       isAuthenticated: !!user,
       loading
